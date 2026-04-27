@@ -1,9 +1,10 @@
-export default function TimeInput({ value, onChange }) {
+export default function DateInput({ value, onChange }) {
     return (
         <input
-            type="time"
+            type="date"
             value={value}
             onChange={(e) => onChange(e.target.value)}
+            className=""
         />
-    )
+    );
 }

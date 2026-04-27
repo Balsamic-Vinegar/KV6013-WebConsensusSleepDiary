@@ -5,7 +5,6 @@ export const schematic = [
         direction:
             "Indicate the time you began attempting to fall asleep",
         type: "time",
-        required: true,
     },
 
     {
@@ -14,7 +13,6 @@ export const schematic = [
         direction:
             "Estimate the number of minutes it took you to fall asleep after first attempting to sleep",
         type: "number",
-        required: true,
         min: 0,
         max: 300,
         suffix: "minutes",
@@ -26,7 +24,6 @@ export const schematic = [
         direction:
             "Indicate the number of times you woke after initially falling asleep.",
         type: "number",
-        required: true,
         min: 0,
         max: 20,
     },
@@ -37,7 +34,6 @@ export const schematic = [
         direction:
             "Estimate the total amount of time spent awake during the night after first falling asleep",
         type: "number",
-        required: true,
         min: 0,
         max: 300,
         suffix: "minutes",
@@ -49,7 +45,6 @@ export const schematic = [
         direction:
             "Indicate the final time you woke up before getting out of bed for the day",
         type: "time",
-        required: true,
     },
 
     {
@@ -58,7 +53,6 @@ export const schematic = [
         direction:
             "Indicate the time you physically got out of bed to begin your day",
         type: "time",
-        required: true,
     },
 
     {
@@ -66,8 +60,7 @@ export const schematic = [
         label: "How would you rate your sleep quality?",
         direction:
             "Rate your sleep quality",
-        type: "scale",
-        required: true,
+        type: "ordinal",
         min: 1,
         max: 5,
     },
@@ -78,7 +71,6 @@ export const schematic = [
         direction:
             "Indicate whether you took naps throughout the day",
         type: "boolean",
-        required: false,
     },
 
     {
@@ -87,6 +79,5 @@ export const schematic = [
         direction:
             "Indicate whether you used any medication, supplements, or sleep aids which affected your sleep",
         type: "boolean",
-        required: false,
     },
 ];
