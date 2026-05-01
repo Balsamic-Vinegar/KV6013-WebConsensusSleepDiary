@@ -26,6 +26,7 @@ export const schematic = [
         type: "number",
         min: 0,
         max: 20,
+        suffix: "times",
     },
 
     {

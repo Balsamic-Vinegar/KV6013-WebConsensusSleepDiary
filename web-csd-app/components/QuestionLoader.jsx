@@ -1,8 +1,8 @@
-import DateInput from "@/components/inputs/DateInput";
-import TimeInput from "@/components/inputs/TimeInput";
-import IntegerInput from "@/components/inputs/IntegerInput";
-import OrdinalInput from "@/components/inputs/OrdinalInput";
-import BooleanInput from "@/components/inputs/BooleanInput";
+import DateInput from "@/components/inputs/DateInput"
+import TimeInput from "@/components/inputs/TimeInput"
+import IntegerInput from "@/components/inputs/IntegerInput"
+import OrdinalInput from "@/components/inputs/OrdinalInput"
+import BooleanInput from "@/components/inputs/BooleanInput"
 
 
 export default function QuestionLoader({question, value, onChange, error}) {
@@ -33,20 +33,20 @@ export default function QuestionLoader({question, value, onChange, error}) {
                         min={question.min}
                         max={question.max}
                     />
-                );
+                )
 
             case "boolean":
                 return <BooleanInput value={value} onChange={onChange}/>
 
             default:
-                return null;
+                return null
         }
     }
 
     return (
         <div className="">
-            <div className="mt-5">{renderInput()}</div>
-            {error ? <p className="mt-4 text-sm text-red-600">{error}</p> : null}
+            <div className="" >{renderInput()}</div>
+            {error ? <p className="text-sm text-red-600">{error}</p> : null}
         </div>
-    );
+    )
 }

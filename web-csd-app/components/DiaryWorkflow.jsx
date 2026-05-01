@@ -3,8 +3,7 @@
 import {useState} from "react"
 import {schematic} from "@/library/schematic"
 import QuestionLoader from "@/components/QuestionLoader"
-//import { validateAnswer, validateSubmission } from "@/library/validation"
-//import
+import { validateAnswer, validateEntry } from "@/library/validation"
 
 export default function DiaryWorkflow() {
     const [questionIndex, setQuestionIndex] = useState(0) //tracks current question
@@ -14,7 +13,6 @@ export default function DiaryWorkflow() {
 
     const question = schematic[questionIndex] //select current question
     const questionAnswer = submission[question?.id] ?? "" //get current answer to select question
-    // const progressPercentage = ((questionIndex + 1) / schematic.length) * 100
 
     function changeAnswer(newAnswer) {
         setSubmission((prev) => ({...prev, [question.id]: newAnswer,}))
@@ -23,37 +21,36 @@ export default function DiaryWorkflow() {
 
     function handleNext() {
 
-        /*
-        const validationError = validateAnswer(question, currentValue);
+
+        const validationError = validateAnswer(question, questionAnswer)
 
         if (validationError) {
             setError(validationError)
             return
         }
-         */
 
         //if not on last question step forward
         if (questionIndex < (schematic.length - 1)) {
-            setQuestionIndex((prev) => prev + 1);
-            setError("");
-            return;
+            setQuestionIndex((prev) => prev + 1)
+            setError("")
+            return
         }
 
-        /*
-        const submissionErrors = validateSubmission(submission);
+
+        const submissionErrors = validateEntry(submission)
         if (submissionErrors.length > 0) {
-            setError(submissionErrors[0]);
-            return;
+            setError(submissionErrors[0])
+            return
         }
-        */
 
-        setCompletion(true);
+        setCompletion(true)
+
     }
 
     function handleBack() {
         if (questionIndex > 0) {
-            setQuestionIndex((prev) => prev - 1);
-            setError("");
+            setQuestionIndex((prev) => prev - 1)
+            setError("")
         }
     }
 
@@ -66,13 +63,15 @@ export default function DiaryWorkflow() {
     }
 
     return (
-        <section className="p-6 bg-pink-200 justify-center text-center">
+        <section className="flex-col flex justify-between p-6 bg-pink-200 text-center max-w-96 min-h-96">
 
-            <p>Question {questionIndex + 1} of {schematic.length}</p>
+            <div>
+                <p>Question {questionIndex + 1} of {schematic.length}</p>
 
-            <h2 className="text-xl">{question.label}</h2>
+                <h2 className="text-xl">{question.label}</h2>
 
-            <p>{question.direction}</p>
+                <p>{question.direction}</p>
+            </div>
 
             <div className="mt-6 bg-blue-200">
                 <QuestionLoader
@@ -93,9 +92,7 @@ export default function DiaryWorkflow() {
                 </button>
 
                 <button onClick={handleNext} className="bg-amber-200">
-                    {questionIndex === schematic.length - 1
-                        ? "Submit"
-                        : "Next>"}
+                    {questionIndex === schematic.length - 1 ? "Submit" : "Next>"}
                 </button>
             </div>
         </section>
