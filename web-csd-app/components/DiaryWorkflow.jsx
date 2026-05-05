@@ -2,6 +2,7 @@
 
 import {useState} from "react"
 import {schematic} from "@/library/schematic"
+import {downloadJson} from "@/library/export"
 import QuestionLoader from "@/components/QuestionLoader"
 import { validateAnswer, validateEntry } from "@/library/validation"
 
@@ -36,15 +37,20 @@ export default function DiaryWorkflow() {
             return
         }
 
+        const finalSubmission = {
+            ...submission,
+            [question.id]: questionAnswer,
+        }
 
-        const submissionErrors = validateEntry(submission)
+        const submissionErrors = validateEntry(finalSubmission)
+
         if (submissionErrors.length > 0) {
             setError(submissionErrors[0])
             return
         }
 
+        downloadJson(finalSubmission)
         setCompletion(true)
-
     }
 
     function handleBack() {
@@ -63,7 +69,7 @@ export default function DiaryWorkflow() {
     }
 
     return (
-        <section className="flex-col flex justify-between p-6 bg-pink-200 text-center max-w-96 min-h-96">
+        <section className="flex flex-col justify-between w-full max-w-96 min-h-[32rem] mx-auto p-8 bg-white rounded-2xl shadow-xl border border-zinc-200 text-center backdrop-blur-sm">
 
             <div>
                 <p>Question {questionIndex + 1} of {schematic.length}</p>
@@ -73,7 +79,7 @@ export default function DiaryWorkflow() {
                 <p>{question.direction}</p>
             </div>
 
-            <div className="mt-6 bg-blue-200">
+            <div className="mt-8 p-6 rounded-2xl border border-zinc-200 bg-zinc-50">
                 <QuestionLoader
                     question={question}
                     value={questionAnswer}
@@ -82,17 +88,17 @@ export default function DiaryWorkflow() {
                 />
             </div>
 
-            <div className="mt-4 flex gap-4 justify-between max-w-[164px] mx-auto bg-green-200 p-1">
+            <div className="flex gap-4 justify-between items-center max-w-xs mx-auto w-full">
                 <button
-                    className="bg-amber-200 disabled:opacity-50"
+                    className="px-5 py-2.5 rounded-xl bg-zinc-200 hover:bg-zinc-300 transition disabled:opacity-40 disabled:cursor-not-allowed"
                     onClick={handleBack}
                     disabled={questionIndex === 0}
                 >
-                    {"<"}Back
+                    {"←"} Back
                 </button>
 
-                <button onClick={handleNext} className="bg-amber-200">
-                    {questionIndex === schematic.length - 1 ? "Submit" : "Next>"}
+                <button onClick={handleNext} className="px-5 py-2.5 rounded-xl bg-zinc-200 hover:bg-zinc-300 transition disabled:opacity-40 disabled:cursor-not-allowed">
+                    {questionIndex === schematic.length - 1 ? "Submit" : "Next →"}
                 </button>
             </div>
         </section>

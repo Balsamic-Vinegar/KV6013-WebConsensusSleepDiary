@@ -8,7 +8,7 @@ export default function IntegerInput({ value, onChange, min, max, suffix }) {
                 min={min}
                 max={max}
                 onChange={(e) => onChange(e.target.value)}
-                className="border px-2 py-2"
+                className="w-24 rounded-md border border-gray-400 px-3 py-2 text-center shadow-sm mr-1"
             />
             {suffix ? <span className="text-sm">{suffix}</span> : null}
         </div>

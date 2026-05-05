@@ -8,11 +8,7 @@ export default function OrdinalInput({ value, onChange, min, max }) {
                 key={number}
                 type="button"
                 onClick={() => onChange(number)}
-                className={
-                    value === number
-                        ? "px-4 py-2 border bg-black text-white"
-                        : "px-4 py-2 border"
-                }
+                className={value === number ? "px-4 py-2 border bg-black text-white rounded-md" : "px-4 py-2 shadow-sm border border-gray-400 rounded-md "}
             >
                 {number}
             </button>

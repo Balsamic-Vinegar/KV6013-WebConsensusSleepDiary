@@ -4,7 +4,7 @@ export default function DateInput({ value, onChange }) {
             type="date"
             value={value}
             onChange={(e) => onChange(e.target.value)}
-            className=""
+            className="w-24 rounded-md border border-gray-400 px-3 py-2 text-center shadow-sm m"
         />
     );
 }
