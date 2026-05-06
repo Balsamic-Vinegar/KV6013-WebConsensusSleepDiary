@@ -1,6 +1,6 @@
 export default function IntegerInput({ value, onChange, min, max, suffix }) {
     return (
-        <div className="flex-col justify-center items-center gap-1">
+        <div className="justify-center items-center gap-1">
             <input
                 type="number"
                 step="1"

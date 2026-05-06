@@ -1,4 +1,3 @@
-import DiaryFlow from "@/components/DiaryWorkflow"
 import DiaryWorkflow from "@/components/DiaryWorkflow"
 
 export default function Page() {

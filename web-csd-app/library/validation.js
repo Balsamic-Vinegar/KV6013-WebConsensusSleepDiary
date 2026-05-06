@@ -7,7 +7,7 @@ export function validateAnswer(question, answer) {
 
     if (question.type === "number") {
 
-        const numberAnswer = Number(answer);
+        const numberAnswer = Number(answer)
 
         //check is number
         if (Number.isNaN(numberAnswer)) {
@@ -24,7 +24,7 @@ export function validateAnswer(question, answer) {
             return `Answer must be no more than ${question.max}.`
         }
     }
-    return "";
+    return ""
 }
 
 function timeToMinutes(time) {

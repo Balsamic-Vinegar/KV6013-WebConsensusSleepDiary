@@ -2,7 +2,7 @@
 
 import {useState} from "react"
 import {schematic} from "@/library/schematic"
-import {downloadJson} from "@/library/export"
+import {downloadJson, downloadCsv} from "@/library/export"
 import QuestionLoader from "@/components/QuestionLoader"
 import { validateAnswer, validateEntry } from "@/library/validation"
 
@@ -63,7 +63,26 @@ export default function DiaryWorkflow() {
     //Submission screen
     if (completion) {
         return (
-            <section>
+            <section className="flex flex-col justify-between w-full max-w-96 min-h-[32rem] mx-auto p-8 bg-white rounded-2xl shadow-xl border border-zinc-200 text-center backdrop-blur-sm">
+
+                <div className="flex flex-col gap-4 max-w-xs mx-auto w-full">
+
+                    <button
+                        onClick={() => downloadJson(submission)}
+                        className="px-5 py-2.5 rounded-xl bg-zinc-200 hover:bg-zinc-300 transition"
+                    >
+                        Download JSON copy
+                    </button>
+
+                    <button
+                        onClick={() => downloadCsv(submission)}
+                        className="px-5 py-2.5 rounded-xl bg-zinc-200 hover:bg-zinc-300 transition"
+                    >
+                        Download CSV copy
+                    </button>
+
+                </div>
+
             </section>
         )
     }

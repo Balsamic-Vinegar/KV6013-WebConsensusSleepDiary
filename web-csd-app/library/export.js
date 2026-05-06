@@ -1,5 +1,5 @@
 
-//downlaod directly from browser
+//downlaod JSON directly from browser
 export function downloadJson(submission) {
     const json = JSON.stringify(submission, null, 2)
 
@@ -17,9 +17,33 @@ export function downloadJson(submission) {
     URL.revokeObjectURL(url)
 }
 
+//download CSV directly from browser
+export function downloadCsv(submission) {
+
+    const keys = Object.keys(submission)
+    const values = Object.values(submission)
+
+    const headerRow = keys.join(",")
+    const valueRow = values.join(",")
+
+    const csv = headerRow + "\n" + valueRow
+
+    const blob = new Blob([csv], {
+        type: "text/csv"
+    })
+
+    const url = URL.createObjectURL(blob)
+
+    const link = document.createElement("a")
+    link.href = url
+    link.download = "sleep-diary-entry.csv"
+    link.click()
+
+    URL.revokeObjectURL(url)
+}
 
 //post to URL - replace placeholder
-async function sendJson(submission) {
+async function postJson(submission) {
 
     await fetch("placeholder", {
         method: "POST",
