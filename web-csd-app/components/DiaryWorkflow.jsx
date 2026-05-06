@@ -49,7 +49,6 @@ export default function DiaryWorkflow() {
             return
         }
 
-        downloadJson(finalSubmission)
         setCompletion(true)
     }
 
