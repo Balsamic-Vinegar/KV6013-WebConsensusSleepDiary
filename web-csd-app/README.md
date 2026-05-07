@@ -1,36 +1,77 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# Web Consensus Sleep Diary
 
-First, run the development server:
+A frontend-only web application implementing a digital version of the Consensus Sleep Diary (CSD) using Next.js and React.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Features
+
+- Step-by-step diary workflow
+- Schema-driven question rendering
+- Field and entry validation
+- JSON and CSV export (client-side)
+
+## Tech Stack
+
+- Next.js
+- React
+- Tailwind CSS
+
+## Editing the Diary Schema
+
+The diary is driven by a schema defined in
+`
+library/schematic.js
+`
+
+Each question is represented as an object in the exported array. For example:
+
+```js
+{
+id: "bedtime",
+label: "What time did you go to bed intending to sleep?",
+type: "time",
+direction: "Indicate the time you began trying to sleep"
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+To modify the diary:
+- Add a question - add a new object to the array
+- Remove a question - delete an object
+- Modify a question - change attributes
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Each question object requires a set of key attributes
+- id - field name for data collected
+- label - question displayed
+- direction - accompanying instruction displayed
+- type - defines the question input type
+- min/max - exclusive to number and ordinal inputs limits range of answers
+- suffix - displayed next to input indicates what unit the user is inputting
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Supported input types:
+- time - time picker input
+- number - integer input
+- ordinal - selectable scale
+- boolean - True/False input
 
-## Learn More
+## Exporting Data
 
-To learn more about Next.js, take a look at the following resources:
+Data export is currently handled client allowing the user to download a basic JSON or CSV format for the purposes of testing.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+For a practical implementation of this replace the current use cases of ``downloadJson`` with``postJson`` designed to export the diary by sending it to a remote endpoint.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Replace the current placeholder endpoint URL with your own:
 
-## Deploy on Vercel
+```js
+async function postJson(submission) {
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    await fetch("https://your-endpoint-url", {
+        method: "POST",
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify(submission, null, 2)
+    })
+}
